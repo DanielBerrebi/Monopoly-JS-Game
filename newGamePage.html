@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>בחירת סוג מונופול</title>
+    <link href="style.css" rel="stylesheet" />
+    <script src="jquery-3.5.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
+</head>
+
+
+<body>
+
+    <script>
+
+        //method which initalize amount of money for each player, and sets the game type
+        function startNewGame() {
+
+            var money = document.getElementById("money").value;
+            var options = document.getElementsByName('gameType');
+            var gameType;
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].checked) {
+                    gameType = options[i].value;
+                }
+            }
+            window.location.href = "boardGame.html";
+            window.localStorage.setItem('player1Money', money);
+            window.localStorage.setItem('player2Money', money);
+            window.localStorage.setItem('gameType', gameType);
+            window.localStorage.setItem('player1Location', 0);
+            window.localStorage.setItem('player2Location', 0);
+            window.localStorage.setItem('playerTurn', 1);
+        };
+
+        //method which update the selected value of money
+        function updateTextInput(val) {
+            document.getElementById('amountMoney').innerHTML = "Money: "+val+"$";
+        }
+    </script>
+    
+            
+    <!---Selection form of game type, money...-->
+    <div class="container">
+        <div id="form_reg">
+            <div class="inner_text">
+                <label for="Money">Initalize amount of money(2000-4000):</label>
+                <div class="row">
+                    <div class="col-9"><input id="money"type="range" name="rangeInput" min="2000" max="4000" onchange="updateTextInput(this.value);"></div>
+                    <div class="col-3"><p id="amountMoney" value="">Money: 3000$</p></div>
+                </div>
+
+
+                <strong><p>Choose type of monopoly:</p></strong>
+                <input id="electronicStore" type="radio" name="gameType" checked="checked" value="0">
+                <label for="Elctronics store">Elctronics store</label><br>
+                <input id="warnerBros" type="radio" name="gameType" value="1">
+                <label for="Warner Bros">Warner Bros</label><br>
+            </div>
+            <button onclick="startNewGame()">start play!</button>
+        </div>
+    </div> 
+</body>
+</html>
